@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Future<void> testPopup(BuildContext context /* Instance */, String message) async /* Threads (run on its own/run in parallel with the program) */ {
+Future<void> showTestPopup(BuildContext context /* Instance */, String message) async /* Threads (run on its own/run in parallel with the program) */ {
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
@@ -25,4 +25,13 @@ Future<void> testPopup(BuildContext context /* Instance */, String message) asyn
  * Button Background: Teal (#004D40 or rgb(0, 77, 64))
  * Button Symbol: White (#FFFFFF or rgb(255, 255, 255))
  * Icon Background / Letter Color over AppBar: White (#FFFFFF or rgb(255, 255, 255))
+ */
+
+/** AppBar Tip
+ * Scaffold -> AppBar: 'extendBodyBehindAppBar: true' and then set AppBar's background colour to Colors.transparent
+ * Best use case: when there's a background image and the AppBar only helps to add icons, or a title etc
+ */
+
+/** Tooltip Widget
+ * If any Widget does not provide me with the default tooltip that I might be looking for, I can just wrap my entire Widget with a Tooltip Widget.
  */
