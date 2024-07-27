@@ -1,26 +1,36 @@
 // notes_functionality.dart
 // This file implements the entire functionality of the 'Add Note' button and the new notes to be created.
+// (main.dart) -> .
 
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
+import "./language_data.dart";
 
 Future<void> showNoteStartup(BuildContext context /* Instance */, String titleName) /* Threads (run on its own/run in parallel with the program) */ {
   TextEditingController controller = TextEditingController();
-  dynamic userInput;
+  // dynamic userInput;
 
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog( // If I were to add a SizedBox to control the size of AlertDialog as a parent, it would be overriden by its contents,
-                          // because that's how AlertDialog works. It often ignores such constraints
-        backgroundColor: const Color.fromRGBO(170, 180, 255, 1),
+                            // because that's how AlertDialog works. It often ignores such constraints
+        backgroundColor: const Color.fromRGBO(245, 245, 220, 1),
         content: Column(
           mainAxisSize: MainAxisSize.min, // Ensures the dialog fits its content
           children: [
             Container(
               alignment: Alignment.topLeft,
-              child: const Text(
-                "Enter note title:",
-                style: TextStyle(
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.elliptical(8, 4)),
+                border: Border.symmetric(
+                  horizontal: BorderSide.none,
+                  vertical: BorderSide.none,
+                ),
+                color: Color.fromRGBO(0, 128, 128, 1),
+              ),
+              child: Text(
+                "${LanguageData.getText("enterTitle")}:",
+                style: const TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 20,
                 )
@@ -31,9 +41,9 @@ Future<void> showNoteStartup(BuildContext context /* Instance */, String titleNa
               child: SizedBox(
                 width: 240,
                 child: TextField(
-                  decoration: const InputDecoration(
-                    hintText: "My Diary",
-                    hintStyle: TextStyle(
+                  decoration: InputDecoration(
+                    hintText: LanguageData.getText("enterTitleHint"),
+                    hintStyle: const TextStyle(
                       color: Color.fromRGBO(0, 0, 0, 0.445),
                     )
                   ),
@@ -49,16 +59,17 @@ Future<void> showNoteStartup(BuildContext context /* Instance */, String titleNa
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text("Cancel"),
+                  child: Text(LanguageData.getText("cancelTitle")),
                 ),
                 TextButton( // Confirm Button
                   onPressed: () {
                     titleName = controller.text;
                     if (titleName != "") {
+                      Navigator.of(context).pop();
                       Navigator.push(context, MaterialPageRoute(builder: (context) => NewNote(titleName: titleName)));
                     } // TODO: else -> show an error (maybe)
                   },
-                  child: const Text("Confirm"),
+                  child: Text(LanguageData.getText("confirmTitle")),
                 )
               ]
             ),
@@ -118,7 +129,7 @@ class _NewNoteState extends State<NewNote> {
           onPressed: () {
             Navigator.pop(context);
           },
-          tooltip: "Go Back",
+          tooltip: LanguageData.getText("newNoteGoBack"),
           icon: const Icon(Icons.arrow_back),
         ),
         centerTitle: true,
@@ -149,7 +160,7 @@ class _NewNoteState extends State<NewNote> {
             padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
               onPressed: toggleEditTitle,
-              tooltip: isEditingTitle ? "Save Title" : "Edit Title",
+              tooltip: isEditingTitle ? LanguageData.getText("newNoteEditTitle") : LanguageData.getText("newNoteSaveTitle"),
               icon: Icon(isEditingTitle ? Icons.check : Icons.edit),
             ),
           )
@@ -164,9 +175,9 @@ class _NewNoteState extends State<NewNote> {
           children: [
             Expanded(
               child: TextField( // TODO: Study to implement storing the notes in .json files
-                decoration: const InputDecoration(
-                  hintText: "Date: 25/07/2024\n\nYesterday, I began studying flutter and dart...",
-                  hintStyle: TextStyle(
+                decoration: InputDecoration(
+                  hintText: LanguageData.getText("newNoteTextHint"),
+                  hintStyle: const TextStyle(
                     fontWeight: FontWeight.w200,
                     color: Color.fromRGBO(176, 190, 197, 1), // Light Grey
                   ),

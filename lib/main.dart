@@ -1,16 +1,21 @@
 // main.dart
 // This is the main file.
+// . (main)
 
-import 'package:flutter/material.dart';
-import 'dart:math';
+import "package:flutter/material.dart";
+import "dart:math";
 
-import './notes_functionality.dart';
-import './settings_functionality.dart';
+import "./notes_functionality.dart";
+import "./settings_functionality.dart";
+import "./global_settings.dart";
+import "./language_data.dart";
 
 void main() {
-  runApp(const MaterialApp(
-    home: KeepItEz(),
+  runApp(MaterialApp( // Removed 'const' from here because the theme cannot be a constant
+    home: const KeepItEz(),
     debugShowCheckedModeBanner: false,
+    theme: GlobalSettings.themeData, // Use global theme
+    // TODO: learn more about the theme
   ));
 }
 
@@ -27,6 +32,9 @@ class _KeepItEzState extends State<KeepItEz> {
 
   @override
   Widget build(BuildContext context) {
+    // Initialize MediaQueryData
+    GlobalSettings.initializeMediaQuery(context);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(0, 128, 128, 1),
@@ -35,10 +43,10 @@ class _KeepItEzState extends State<KeepItEz> {
           onPressed: () {
             // Add timer functionality
           },
-          tooltip: "Timer",
+          tooltip: LanguageData.getText("timer"),
           icon: const Icon(Icons.timer),
         ),
-        title: const Text("KeepItEz", style: TextStyle(fontWeight: FontWeight.w500)),
+        title: const Text("KeepItEasy", style: TextStyle(fontWeight: FontWeight.w500)),
         centerTitle: true,
         actions: [
           Padding(
@@ -46,16 +54,22 @@ class _KeepItEzState extends State<KeepItEz> {
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 50, maxHeight: 50),
               child: Tooltip(
-                message: settingsFunctionality.showTooltip ? "" : "Settings",
+                message: settingsFunctionality.showTooltip ? "" : LanguageData.getText("settings"),
                 child: PopupMenuButton<SettingOption>(
                   onSelected: (value) {
-                    settingsFunctionality.handleSettingOptionChange(this, value);
+                    settingsFunctionality.handleSettingOptionChange(
+                      context,
+                      () => setState(() {}) /* Current state to be used in the 'setState' method; value passed: _KeepItEzState */,
+                      value
+                    );
                   },
                   onCanceled: () {
-                    settingsFunctionality.handlePopupMenuCanceled(this);
+                    settingsFunctionality.handlePopupMenuCanceled(
+                      () => setState(() {})
+                    );
                   },
                   itemBuilder: (BuildContext context) {
-                    return settingOptions.entries.map((entry) {
+                    return settingOptions.entries.map((entry) { // TODO: Fix the pop-up menu's items when changing the language. It doesn't get updated
                       return PopupMenuItem<SettingOption>(
                         value: entry.key,
                         child: Text(
@@ -87,8 +101,8 @@ class _KeepItEzState extends State<KeepItEz> {
         height: double.infinity,
         width: double.infinity,
         color: const Color.fromRGBO(249, 249, 224, 1), // Soft Cream
-        child: Column(
-          children: const [
+        child: const Column( // REMOVE COLUMN HERE AFTER I'M DONE
+          children: [
             Text(
               "Main Container content here",
               style: TextStyle(
@@ -101,15 +115,22 @@ class _KeepItEzState extends State<KeepItEz> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: IconButton(
-        onPressed: () {
-          showNoteStartup(context, titleName);
-        },
-        tooltip: "Add a note",
-        icon: const Icon(Icons.add),
-        style: const ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(Color.fromRGBO(0, 77, 64, 1)),
-          iconColor: MaterialStatePropertyAll(Color.fromRGBO(255, 255, 255, 1)),
+      floatingActionButton: SizedBox(
+        width: 45.0,
+        height: 45.0,
+        child: FloatingActionButton(
+          onPressed: () {
+            showNoteStartup(context, titleName);
+          },
+          tooltip: LanguageData.getText('addNote'),
+          backgroundColor: const Color.fromRGBO(0, 77, 64, 1),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(32.0),
+          ),
+          child: const Icon(
+            Icons.add,
+            color: Color.fromRGBO(255, 255, 255, 1),
+          ),
         ),
       ),
     );

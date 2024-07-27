@@ -1,6 +1,10 @@
-import 'package:flutter/material.dart';
+// test_and_notes.dart
+// This file contains developer notes for frequently used, or interesting stuff; and some test objects for debug purposes.
+// . (global file)
 
-Future<void> showTestPopup(BuildContext context /* Instance */, String message) async /* Threads (run on its own/run in parallel with the program) */ {
+import "package:flutter/material.dart";
+
+Future<void> showTestPopup(BuildContext context /* Instance */, String? message) async /* Threads (run on its own/run in parallel with the program) */ {
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
@@ -10,6 +14,8 @@ Future<void> showTestPopup(BuildContext context /* Instance */, String message) 
     }
   );
 }
+
+// TODO: Fix the 'android' kind of error with the paths
 
 /** My Colours
  * Baby blue: 255, 170, 180, 255
@@ -34,4 +40,14 @@ Future<void> showTestPopup(BuildContext context /* Instance */, String message) 
 
 /** Tooltip Widget
  * If any Widget does not provide me with the default tooltip that I might be looking for, I can just wrap my entire Widget with a Tooltip Widget.
+ */
+
+/** Question-mark (example)
+ * String? name;
+ * int? length = name?.length; // If name is null, length will be null instead of throwing an error
+ */
+
+// TODO: Think of an example here
+/** Exclamation-mark (example)
+ * 
  */
