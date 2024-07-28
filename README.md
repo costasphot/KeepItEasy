@@ -24,3 +24,7 @@ This is the initial alpha release of the application. It marks the first version
 - Performance improvements and bug fixes.
 - Fix any overflows that may happen (keep the app as safe as possible).
 - Work on test files.
+
+## Notes
+
+Adopting the format '**MAJOR.MINOR.PATCH**' ([Semantic Versioning/SemVer](https://semver.org/)).
