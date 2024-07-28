@@ -1,0 +1,16 @@
+{
+  "dart.flutterSdkPath": "C:\\src\\flutter", // Path to Flutter SDK
+  "dart.flutterCreateOrganization": "com.pitmtech",
+  "dart.sdkPath": "C:\\src\\flutter\\bin\\cache\\dart-sdk", // Path to Dart SDK
+  "dart.lineLength": 80, // Adhering to Google's style guide line length (*)
+  "workbench.colorTheme": "Default Dark+", // Set your preferred theme
+  "editor.tabSize": 2, // *same
+  "editor.insertSpaces": true, // *same
+  "editor.detectIndentation": true,
+  "terminal.integrated.defaultProfile.windows": "Command Prompt",
+  "terminal.integrated.profiles.windows": {
+    "Command Prompt": {
+      "path": "C:\\Windows\\System32\\cmd.exe"
+    }
+  },
+}

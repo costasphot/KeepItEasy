@@ -4,11 +4,10 @@
 
 import "package:flutter/material.dart";
 import "dart:math";
-
-import "./notes_functionality.dart";
-import "./settings_functionality.dart";
-import "./global_settings.dart";
-import "./language_data.dart";
+import "package:keepitez/notes_functionality.dart";
+import "package:keepitez/settings_functionality.dart";
+import "package:keepitez/global_settings.dart";
+import "package:keepitez/language_data.dart";
 
 void main() {
   runApp(MaterialApp( // Removed 'const' from here because the theme cannot be a constant
@@ -60,16 +59,18 @@ class _KeepItEzState extends State<KeepItEz> {
                     settingsFunctionality.handleSettingOptionChange(
                       context,
                       () => setState(() {}) /* Current state to be used in the 'setState' method; value passed: _KeepItEzState */,
+                      // Also refreshes state to update language-dependent items
                       value
                     );
                   },
                   onCanceled: () {
                     settingsFunctionality.handlePopupMenuCanceled(
-                      () => setState(() {})
+                      () => setState(() {}) // TODO: write an example in 'test_and_notes.dart' about explaining this line's syntax
+                      // Same here
                     );
                   },
                   itemBuilder: (BuildContext context) {
-                    return settingOptions.entries.map((entry) { // TODO: Fix the pop-up menu's items when changing the language. It doesn't get updated
+                    return settingsFunctionality.settingOptions.entries.map((entry) {
                       return PopupMenuItem<SettingOption>(
                         value: entry.key,
                         child: Text(

@@ -3,7 +3,7 @@
 // (main.dart) -> .
 
 import "package:flutter/material.dart";
-import "./language_data.dart";
+import "package:keepitez/language_data.dart";
 
 Future<void> showNoteStartup(BuildContext context /* Instance */, String titleName) /* Threads (run on its own/run in parallel with the program) */ {
   TextEditingController controller = TextEditingController();

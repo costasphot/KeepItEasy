@@ -3,8 +3,7 @@
 // (main.dart) -> (settings_functionality.dart) -> .
 
 import "package:flutter/material.dart";
-
-import "./language_data.dart";
+import "package:keepitez/language_data.dart";
 
 Future<void> showLanguagesPopup(BuildContext context, LanguageOption? selectedLanguage, ValueChanged<LanguageOption> onLanguageSelected) async {
   return showDialog<void>(
@@ -22,30 +21,32 @@ Future<void> showLanguagesPopup(BuildContext context, LanguageOption? selectedLa
           builder: (BuildContext context, StateSetter setState) {
             return Padding(
               padding: const EdgeInsets.all(20.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: languageOptions.entries.map((entry) {
-                  return RadioListTile<LanguageOption>(
-                    value: entry.key,
-                    groupValue: selectedLanguage,
-                    title: Text(
-                      entry.value,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        color: Color.fromRGBO(0, 77, 64, 1)
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: languageOptions.entries.map((entry) {
+                    return RadioListTile<LanguageOption>(
+                      value: entry.key,
+                      groupValue: selectedLanguage,
+                      title: Text(
+                        entry.value,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Color.fromRGBO(0, 77, 64, 1)
+                        ),
                       ),
-                    ),
-                    activeColor: const Color.fromRGBO(0, 128, 128, 1),
-                    onChanged: (LanguageOption? value) {
-                      if (value != null) {
-                        setState(() {
-                          selectedLanguage = value;
-                        });
-                        onLanguageSelected(value);
-                      }
-                    },
-                  );
-                }).toList(),
+                      activeColor: const Color.fromRGBO(0, 128, 128, 1),
+                      onChanged: (LanguageOption? value) {
+                        if (value != null) {
+                          setState(() {
+                            selectedLanguage = value;
+                          });
+                          onLanguageSelected(value);
+                        }
+                      },
+                    );
+                  }).toList(),
+                ),
               ),
             );
           },

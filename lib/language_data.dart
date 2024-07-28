@@ -5,7 +5,7 @@
 // Define the enum for language options
 enum LanguageOption { english, german, french, spanish, italian, greek, romanian, chinese, japanese, korean }
 
-final Map<LanguageOption, String> languageOptions = { // TODO: Make sure they"re correct
+final Map<LanguageOption, String> languageOptions = { // TODO: Make sure they're correct
   LanguageOption.english: "English",
   LanguageOption.german: "Deutsch",
   LanguageOption.french: "Français",

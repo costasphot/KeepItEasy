@@ -4,6 +4,7 @@
 
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
+import "package:flutter/foundation.dart";
 
 void exitApp() {
   SystemNavigator.pop();
@@ -20,4 +21,6 @@ class GlobalSettings {
   static void initializeMediaQuery(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
   }
+
+  static const bool isDebugMode = kDebugMode; // kDebugMode is initialized in 'flutter/foundation.dart' - is automatically detected
 }
