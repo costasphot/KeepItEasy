@@ -5,75 +5,78 @@
 import "package:flutter/material.dart";
 import "package:keepitez/language_data.dart";
 
-Future<void> showNoteStartup(BuildContext context /* Instance */, String titleName) /* Threads (run on its own/run in parallel with the program) */ {
+Future<void> showNoteStartup(BuildContext context /* Instance */, String titleName) async /* Threads (run on its own/run in parallel with the program) */ {
   TextEditingController controller = TextEditingController();
   // dynamic userInput;
 
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
-      return AlertDialog( // If I were to add a SizedBox to control the size of AlertDialog as a parent, it would be overriden by its contents,
-                            // because that's how AlertDialog works. It often ignores such constraints
+      return AlertDialog( // If I were to add a SizedBox to control the size of AlertDialog as a parent, it would be overriden by
+                           // its contents, because that's how AlertDialog works. It often ignores such constraints.
         backgroundColor: const Color.fromRGBO(245, 245, 220, 1),
-        content: Column(
-          mainAxisSize: MainAxisSize.min, // Ensures the dialog fits its content
-          children: [
-            Container(
-              alignment: Alignment.topLeft,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.elliptical(8, 4)),
-                border: Border.symmetric(
-                  horizontal: BorderSide.none,
-                  vertical: BorderSide.none,
-                ),
-                color: Color.fromRGBO(0, 128, 128, 1),
-              ),
-              child: Text(
-                "${LanguageData.getText("enterTitle")}:",
-                style: const TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20,
-                )
-              )
-            ),
-            SingleChildScrollView( // Horizontal scroll if title exceeds fixed size
-              scrollDirection: Axis.horizontal,
-              child: SizedBox(
-                width: 240,
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: LanguageData.getText("enterTitleHint"),
-                    hintStyle: const TextStyle(
-                      color: Color.fromRGBO(0, 0, 0, 0.445),
-                    )
+        content: SingleChildScrollView( // This will never happen in a mobile app. It's only to avoid pixel overflow when resizing
+                                         // too small, in a desktop app.
+          child: Column(
+            mainAxisSize: MainAxisSize.min, // Ensures the dialog fits its content
+            children: [
+              Container(
+                alignment: Alignment.topLeft,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.elliptical(8, 4)),
+                  border: Border.symmetric(
+                    horizontal: BorderSide.none,
+                    vertical: BorderSide.none,
                   ),
-                  controller: controller,
-                  maxLength: 26,
+                  color: Color.fromRGBO(0, 128, 128, 1),
+                ),
+                child: Text(
+                  "${LanguageData.getText("enterTitle")}:",
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 20,
+                  )
+                )
+              ),
+              SingleChildScrollView( // Horizontal scroll if title exceeds fixed size
+                scrollDirection: Axis.horizontal,
+                child: SizedBox(
+                  width: 240,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: LanguageData.getText("enterTitleHint"),
+                      hintStyle: const TextStyle(
+                        color: Color.fromRGBO(0, 0, 0, 0.445),
+                      )
+                    ),
+                    controller: controller,
+                    maxLength: 26,
+                  ),
                 ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround, // Main axis: for a ROW it's HORIZONAL (so left to right) e.g: |---| space |---| space |---|
-              children: [
-                TextButton( // Cancel Button
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text(LanguageData.getText("cancelTitle")),
-                ),
-                TextButton( // Confirm Button
-                  onPressed: () {
-                    titleName = controller.text;
-                    if (titleName != "") {
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround, // Main axis: for a ROW it's HORIZONAL (so left to right) e.g: |---| space |---| space |---|
+                children: [
+                  TextButton( // Cancel Button
+                    onPressed: () {
                       Navigator.of(context).pop();
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => NewNote(titleName: titleName)));
-                    } // TODO: else -> show an error (maybe)
-                  },
-                  child: Text(LanguageData.getText("confirmTitle")),
-                )
-              ]
-            ),
-          ],
+                    },
+                    child: Text(LanguageData.getText("cancelTitle")),
+                  ),
+                  TextButton( // Confirm Button
+                    onPressed: () {
+                      titleName = controller.text;
+                      if (titleName != "") {
+                        Navigator.of(context).pop();
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => NewNote(titleName: titleName)));
+                      } // TODO: else -> show an error (maybe)
+                    },
+                    child: Text(LanguageData.getText("confirmTitle")),
+                  )
+                ]
+              ),
+            ],
+          ),
         ),
       );
     }
@@ -83,7 +86,14 @@ Future<void> showNoteStartup(BuildContext context /* Instance */, String titleNa
 class NewNote extends StatefulWidget {
   final String titleName;
 
-  const NewNote({super.key, required this.titleName});
+  // Constructor that initializes the 'NewNote' widget
+  const NewNote({
+    super.key, // 'super.key' passes the 'key' parameter to the superclass 'StatefulWidget'
+                // 'key' is used by Flutter's framework to manage widget trees efficiently
+                 // Using 'super.key' allows us to pass a key to the parent 'StatefulWidget' constructor
+    required this.titleName // 'this.titleName' is an initializer that assigns a parameter's value to the class' property
+                             // It's also a mandatory parameter when creating an instance of 'NewNote'
+  });
 
   @override
   State<NewNote> createState() => _NewNoteState();
@@ -95,6 +105,7 @@ class _NewNoteState extends State<NewNote> {
   late String title;
   bool isEditingTitle = false;
 
+  // Initialize any necessary components (controllers and the class' property)
   @override
   void initState() {
     super.initState();
@@ -103,9 +114,11 @@ class _NewNoteState extends State<NewNote> {
     noteController = TextEditingController();
   }
 
+  // Always dispose resources such as controllers, streams, and subscriptions to avoid memory leaks
   @override
   void dispose() {
     titleController.dispose();
+    noteController.dispose(); // Added later
     super.dispose();
   }
 

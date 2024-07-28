@@ -46,7 +46,7 @@ Map<SettingOption, String> get settingOptions => {
           break;
         case SettingOption.option3:
           Navigator.of(context).pop(); // Exit the current pop-up menu first
-          exitApp();
+          GlobalSettings.exitApp();
           break;
       }
     }

@@ -208,3 +208,8 @@ Future<void> showTestPopup(BuildContext context /* Instance */, String? message)
  * 1. Expanded cannot be directly used inside a Padding. It needs to be wrapped inside a Flex widget (like Row or Column)
  *  as its direct parent.
  */
+
+/** Dart Analyzer and Compiler behaviour
+ * When importing a package or file, Dart's build system (including the Dart Analyzer and Dart Compiler) resolves these
+ *  imports at compile time. It works similarly to how static linking in C/C++.
+ */

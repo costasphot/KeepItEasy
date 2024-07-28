@@ -3,14 +3,19 @@
 // . (global file)
 
 import "package:flutter/material.dart";
-import "package:flutter/services.dart";
-import "package:flutter/foundation.dart";
+import "package:flutter/services.dart"; // Handles exiting the app on mobile devices
+import "package:flutter/foundation.dart"; // Initializes kDebugMode automatically
+import "dart:io"; // Handles exiting the app on desktop platforms and provides info in which the current program is running (Platform)
 
-void exitApp() {
-  SystemNavigator.pop();
-}
+class GlobalSettings with WidgetsBindingObserver {
+  static final GlobalSettings instance = GlobalSettings.internal();
 
-class GlobalSettings {
+  factory GlobalSettings() {
+    return instance;
+  }
+
+  GlobalSettings.internal();
+
   // Example of a global theme setting
   static ThemeData themeData = ThemeData.light();
 
@@ -23,4 +28,35 @@ class GlobalSettings {
   }
 
   static const bool isDebugMode = kDebugMode; // kDebugMode is initialized in 'flutter/foundation.dart' - is automatically detected
+
+  void initialize() {
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.detached) {
+      performCleanup();
+    }
+  }
+
+  void performCleanup() {
+    if (kDebugMode) {
+      print("DEBUG: Performing cleanup before app termination.");
+    }
+
+    // Cleanup code here:
+    if (kDebugMode) {
+      print("DEBUG: Successfully cleaned up resources.");
+    }
+  }
+
+  static void exitApp() {
+    instance.performCleanup();
+    if (Platform.isAndroid || Platform.isIOS) {
+      SystemNavigator.pop();
+    } else if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+      exit(0);
+    }
+  }
 }

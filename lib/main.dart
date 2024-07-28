@@ -10,6 +10,8 @@ import "package:keepitez/global_settings.dart";
 import "package:keepitez/language_data.dart";
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  GlobalSettings().initialize();
   runApp(MaterialApp( // Removed 'const' from here because the theme cannot be a constant
     home: const KeepItEz(),
     debugShowCheckedModeBanner: false,
@@ -65,7 +67,7 @@ class _KeepItEzState extends State<KeepItEz> {
                   },
                   onCanceled: () {
                     settingsFunctionality.handlePopupMenuCanceled(
-                      () => setState(() {}) // TODO: write an example in 'test_and_notes.dart' about explaining this line's syntax
+                      () => setState(() {})
                       // Same here
                     );
                   },

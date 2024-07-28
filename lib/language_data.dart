@@ -21,7 +21,7 @@ final Map<LanguageOption, String> languageOptions = { // TODO: Make sure they're
 class LanguageData { // TODO: Finish all these
   static final Map<String, Map<String, String>> _localizedValues = {
     // english, deutsch, french, spanish, italian, greek, romanian, chinese, japanese, korean
-    "en": {
+    "en": { // Native translator
       "timer": "Timer",
       "settings": "Settings",
       "setting1": "Themes",
@@ -126,7 +126,7 @@ class LanguageData { // TODO: Finish all these
       "newNoteTextHint": ""
     },
 
-    "gr": {
+    "gr": { // Native translator
       "timer": "Χρονόμετρο",
       "settings": "Ρυθμίσεις",
       "setting1": "Θέματα", // TODO: should I have the setting(k) or the "chooseTheme", "chooseLanguage" etc? I mean what was their purpose?
@@ -147,7 +147,7 @@ class LanguageData { // TODO: Finish all these
       "newNoteTextHint": "Ημερομηνία: 25/07/2024\n\nΧθες, ξεκίνησα να διαβάσω flutter και dart..."
     },
 
-    "ro": {
+    "ro": { // Native translator
       "timer": "Temporizator",
       "settings": "Setări",
       "setting1": "Teme",
@@ -208,7 +208,7 @@ class LanguageData { // TODO: Finish all these
       "newNoteTextHint": ""
     },
 
-    "kr": {
+    "kr": { // Trusted source
       "timer": "",
       "settings": "",
       "setting1": "",

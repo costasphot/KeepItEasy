@@ -1,0 +1,38 @@
+{
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "keepitez", // Name of the configuration
+      "request": "launch", // Specifies that this configuration will launch a new instance
+      "type": "dart", // Indicates that the configuration is for a Dart/Flutter project
+      "args": ["--flavor", "development"]
+    },
+    {
+      "name": "keepitez (profile mode)", // Configuration for the app in profile mode
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile" // This runs the app in profile mode, which is useful for performance testing
+    },
+    {
+      "name": "keepitez (release mode)", // Configuration for the app in release mode
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release" // This runs the app in release mode, which is optimized for performance and size
+    },
+    {
+      "name": "keepitez (web)", // Configuration for the app in web mode
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "edge" // or "chrome" if using Google Chrome, but I'll prefer the standard Windows browser
+    }
+    /* Example for running on a specific/custom device
+      {
+        "name": "keepitez (custom device)",
+        "request": "launch",
+        "type": "dart",
+        "deviceId": "emulator-5554" // Replace with device ID
+      }
+    */
+  ]
+}
