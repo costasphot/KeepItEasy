@@ -32,6 +32,17 @@ This is the second alpha release of the application. It mostly contains performa
 - Fix any overflows that may happen (keep the app as safe as possible).
 - Work on test files.
 
+## Installation
+To install and run **KeepItEasy**:
+1. **Ensure** you have Flutter installed. [Installation instructions](https://docs.flutter.dev/get-started/install).
+2. Clone the repository:
+```console
+git clone https://github.com/costasphot/KeepItEasy.git
+```
+3. **Run the app** using Flutter:
+```console
+flutter run
+```
 ## Notes
 
 Adopting the format '**MAJOR.MINOR.PATCH**' ([Semantic Versioning/SemVer](https://semver.org/)).
