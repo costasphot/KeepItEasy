@@ -8,6 +8,7 @@ import "package:keepitez/notes_functionality.dart";
 import "package:keepitez/settings_functionality.dart";
 import "package:keepitez/global_settings.dart";
 import "package:keepitez/language_data.dart";
+import "package:keepitez/timer_functionality.dart";
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,12 +43,52 @@ class _KeepItEzState extends State<KeepItEz> {
         foregroundColor: const Color.fromRGBO(255, 255, 255, 1),
         leading: IconButton(
           onPressed: () {
-            // Add timer functionality
+            TimerFunctionality().showTimerDialog(context);
           },
           tooltip: LanguageData.getText("timer"),
           icon: const Icon(Icons.timer),
         ),
-        title: const Text("KeepItEasy", style: TextStyle(fontWeight: FontWeight.w500)),
+        title: Stack(
+          alignment: Alignment.center,
+          children: [
+            // Centered title
+            const Text(
+              "KeepItEasy",
+              textAlign: TextAlign.center,
+            ),
+            // Timer display aligned to the left
+            Align(
+              alignment: Alignment.centerLeft,
+              child: ValueListenableBuilder<String>(
+                valueListenable: TimerFunctionality.timerDisplay,
+                builder: (context, value, child) {
+                  return value.isNotEmpty
+                      ? GestureDetector(
+                          onTap: () {
+                            TimerFunctionality().showTimerControlDialog(context);
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.primaryContainer,
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: Text(
+                              value,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).colorScheme.onPrimaryContainer,
+                              ),
+                            ),
+                          ),
+                        )
+                      : const SizedBox.shrink();
+                },
+              ),
+            ),
+          ],
+        ),
         centerTitle: true,
         actions: [
           Padding(
@@ -104,18 +145,6 @@ class _KeepItEzState extends State<KeepItEz> {
         height: double.infinity,
         width: double.infinity,
         color: const Color.fromRGBO(249, 249, 224, 1), // Soft Cream
-        child: const Column( // REMOVE COLUMN HERE AFTER I'M DONE
-          children: [
-            Text(
-              "Main Container content here",
-              style: TextStyle(
-                color: Color.fromRGBO(0, 77, 64, 1),
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
-        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: SizedBox(
