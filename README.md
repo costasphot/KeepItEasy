@@ -7,6 +7,7 @@ This is the second alpha release of the application. It mostly contains performa
 ## New Features
 
 - Added a GestureDetector and a scroll controller in the languages pop-up so that you can scroll (for future updates, where there will way more languages).
+- Timer functionality with pause/resume options
 
 ## Bug Fixes
 
