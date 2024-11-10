@@ -20,11 +20,11 @@ class SettingsFunctionality {
   // Define the options for the popup menu
   // Note: moved it inside so that the map is now a class getter, ensuring it always fetches the latest language data.
   //       Also, I removed the 'final' because we don't want a final Map, but a getter (becareful of the syntax).
-Map<SettingOption, String> get settingOptions => {
-  SettingOption.option1: LanguageData.getText("setting1"), // Themes
-  SettingOption.option2: LanguageData.getText("setting2"), // Languages
-  SettingOption.option3: LanguageData.getText("setting3"), // Exit (pretty much useless)
-};
+  Map<SettingOption, String> get settingOptions => {
+    SettingOption.option1: LanguageData.getText("setting1"), // Themes
+    SettingOption.option2: LanguageData.getText("setting2"), // Languages
+    SettingOption.option3: LanguageData.getText("setting3"), // Exit (pretty much useless)
+  };
 
   void handleSettingOptionChange(BuildContext context, VoidCallback setStateCallback, SettingOption? value) {
     setStateCallback();
