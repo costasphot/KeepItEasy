@@ -5,24 +5,38 @@ import "package:flutter/material.dart";
 
 class AppColours {
   // Teal
-  static const MaterialColor teal = MaterialColor( // See flutter's 'Color.' file
+  static const MaterialColor teal = MaterialColor(
     _tealPrimaryValue,
     <int, Color>{
-      100: Color(_tealPrimaryValue),
-      200: Color(0xFF006762),
-      300: Color(0xFF004D40),
+      50:  Color(0xFFE0F2F1),
+      100: Color(0xFFB2DFDB),
+      200: Color(0xFF80CBC4),
+      300: Color(0xFF4DB6AC),
+      400: Color(0xFF26A69A),
+      500: Color(_tealPrimaryValue),
+      600: Color(0xFF00897B),
+      700: Color(0xFF00796B),
+      800: Color(0xFF00695C),
+      900: Color(0xFF004D40),
     },
   );
   static const int _tealPrimaryValue = 0xFF008080;
 
   // Fire (yellow, orange, red)
   static const MaterialColor fire = MaterialColor(
-      _firePrimaryValue,
-      <int, Color>{
-        100: Color(0xFFFBC02D),
-        200: Color(_firePrimaryValue),
-        300: Color(0xFFD32F2F),
-      },
+    _firePrimaryValue,
+    <int, Color>{
+      50:  Color(0xFFFFF3E0),
+      100: Color(0xFFFFE0B2),
+      200: Color(0xFFFFCC80),
+      300: Color(0xFFFFB74D),
+      400: Color(0xFFFFA726),
+      500: Color(_firePrimaryValue),
+      600: Color(0xFFFB8C00),
+      700: Color(0xFFF57C00),
+      800: Color(0xFFEF6C00),
+      900: Color(0xFFE65100),
+    },
   );
   static const int _firePrimaryValue = 0xFFFFA726;
 
