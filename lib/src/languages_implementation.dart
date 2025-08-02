@@ -3,7 +3,8 @@
 // (main.dart) -> (settings_functionality.dart) -> .
 
 import "package:flutter/material.dart";
-import "package:keepitez/language_data.dart";
+import "package:keepitez/src/language_data.dart";
+import "package:keepitez/src/constants/colours.dart";
 
 Future<void> showLanguagesPopup(BuildContext context, LanguageOption? selectedLanguage, ValueChanged<LanguageOption> onLanguageSelected) async {
   return showDialog<void>(
@@ -13,8 +14,8 @@ Future<void> showLanguagesPopup(BuildContext context, LanguageOption? selectedLa
         backgroundColor: const Color.fromRGBO(249, 249, 224, 1),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
-          side: const BorderSide(
-            color: Color.fromRGBO(0, 128, 128, 1),
+          side: BorderSide(
+            color: AppColours.primaryColour,
           ),
         ),
         child: StatefulBuilder(
@@ -37,6 +38,8 @@ Future<void> showLanguagesPopup(BuildContext context, LanguageOption? selectedLa
                   child: SingleChildScrollView(
                     controller: scrollController,
                     physics: const ScrollPhysics(parent: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics(), decelerationRate: ScrollDecelerationRate.normal)),
+                    scrollDirection: Axis.vertical,
+                    reverse: false,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: languageOptions.entries.map((entry) {
@@ -50,7 +53,7 @@ Future<void> showLanguagesPopup(BuildContext context, LanguageOption? selectedLa
                               color: Color.fromRGBO(0, 77, 64, 1)
                             ),
                           ),
-                          activeColor: const Color.fromRGBO(0, 128, 128, 1),
+                          activeColor: AppColours.primaryColour,
                           onChanged: (LanguageOption? value) {
                             if (value != null) {
                               setState(() {

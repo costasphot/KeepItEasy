@@ -1,11 +1,13 @@
-// settings_functionality.dart
+// src/settings_functionality.dart
 // This file implements the functionalities of the 'Settings' button.
 // (main.dart) -> .
 
+// TODO: implements the functionalities of the settings button?
+
 import "package:flutter/material.dart";
-import "package:keepitez/languages_implementation.dart";
-import "package:keepitez/language_data.dart";
-import "package:keepitez/global_settings.dart";
+import "package:keepitez/src/languages_implementation.dart";
+import "package:keepitez/src/language_data.dart";
+import "package:keepitez/src/global_settings.dart";
 
 // Define the enum for settings options
 enum SettingOption { option1, option2, option3 }
@@ -35,7 +37,7 @@ Map<SettingOption, String> get settingOptions => {
     if (value != null) {
       switch (value) {
         case SettingOption.option1:
-          // Add functionality for Themes
+          
           break;
         case SettingOption.option2:
           showLanguagesPopup(context, selectedLanguage, (LanguageOption newLanguage) {

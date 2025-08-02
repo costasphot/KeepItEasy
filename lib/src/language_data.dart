@@ -19,7 +19,7 @@ final Map<LanguageOption, String> languageOptions = { // TODO: Make sure they're
 };
 
 class LanguageData { // TODO: Finish all these
-  static final Map<String, Map<String, String>> _localizedValues = {
+  static final Map<String, Map<String, String>> localizedLanguageValues = {
     // english, deutsch, french, spanish, italian, greek, romanian, chinese, japanese, korean
     "en": { // Native translator
       "timer": "Timer",
@@ -136,7 +136,7 @@ class LanguageData { // TODO: Finish all these
       "chooseTheme": "",
       "chooseLanguage": "",
       "exitSettings": "",
-      "addNote": "Προσθέστε μία σημείωση",
+      "addNote": "Προσθήκη σημείωσης",
       "enterTitle": "Επιλέξτε έναν τίτλο",
       "enterTitleHint": "Το ημερολόγιό μου",
       "cancelTitle": "Ακύρωση",
@@ -232,7 +232,7 @@ class LanguageData { // TODO: Finish all these
   static String languageCode = "en";
 
   static String getText(String key) {
-    return _localizedValues[languageCode]?[key] ?? key;
+    return localizedLanguageValues[languageCode]?[key] ?? key;
   }
 
   static void setLanguage(String code) {

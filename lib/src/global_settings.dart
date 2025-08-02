@@ -6,6 +6,7 @@ import "package:flutter/material.dart";
 import "package:flutter/services.dart"; // Handles exiting the app on mobile devices
 import "package:flutter/foundation.dart"; // Initializes kDebugMode automatically
 import "dart:io"; // Handles exiting the app on desktop platforms and provides info in which the current program is running (Platform)
+import "package:keepitez/src/theme_data.dart";
 
 class GlobalSettings with WidgetsBindingObserver {
   static final GlobalSettings instance = GlobalSettings.internal();
@@ -16,8 +17,11 @@ class GlobalSettings with WidgetsBindingObserver {
 
   GlobalSettings.internal();
 
-  // Example of a global theme setting
-  static ThemeData themeData = ThemeData.light();
+  // Initialize theme setting
+  ThemeOption currentThemeOption = ThemeOption.defaultLight;
+
+  // Provide a getter for the current ThemeData
+  ThemeData get themeData => ThemeConfig.appThemeData[currentThemeOption]!;
 
   // Example of a global MediaQueryData setting (this should be updated in your main widget)
   static MediaQueryData? mediaQueryData;
@@ -49,6 +53,10 @@ class GlobalSettings with WidgetsBindingObserver {
     if (kDebugMode) {
       print("DEBUG: Successfully cleaned up resources.");
     }
+  }
+
+  void setTheme(ThemeOption themeOption) {
+    currentThemeOption = themeOption;
   }
 
   static void exitApp() {

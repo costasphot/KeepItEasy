@@ -1,9 +1,9 @@
-// notes_functionality.dart
+// src/notes_functionality.dart
 // This file implements the entire functionality of the 'Add Note' button and the new notes to be created.
 // (main.dart) -> .
 
 import "package:flutter/material.dart";
-import "package:keepitez/language_data.dart";
+import "package:keepitez/src/language_data.dart";
 
 Future<void> showNoteStartup(BuildContext context /* Instance */, String titleName) async /* Threads (run on its own/run in parallel with the program) */ {
   TextEditingController controller = TextEditingController();
@@ -104,6 +104,7 @@ class _NewNoteState extends State<NewNote> {
   // dynamic userInput; // Storing it in a .json file with its corresponding title
   late String title;
   bool isEditingTitle = false;
+  late FocusNode titleFocusNode;
 
   // Initialize any necessary components (controllers and the class' property)
   @override
@@ -112,6 +113,7 @@ class _NewNoteState extends State<NewNote> {
     title = widget.titleName;
     titleController = TextEditingController(text: title);
     noteController = TextEditingController();
+    titleFocusNode = FocusNode();
   }
 
   // Always dispose resources such as controllers, streams, and subscriptions to avoid memory leaks
@@ -119,6 +121,7 @@ class _NewNoteState extends State<NewNote> {
   void dispose() {
     titleController.dispose();
     noteController.dispose(); // Added later
+    titleFocusNode.dispose();
     super.dispose();
   }
 
@@ -127,6 +130,9 @@ class _NewNoteState extends State<NewNote> {
       if (isEditingTitle) {
         // Save the changes
         title = titleController.text;
+      } else {
+        // Focus on the TextField when entering edit mode
+        FocusScope.of(context).requestFocus(titleFocusNode);
       }
       isEditingTitle = !isEditingTitle;
     });
@@ -150,6 +156,7 @@ class _NewNoteState extends State<NewNote> {
             ? TextField(
                 controller: titleController,
                 autofocus: true, // I think the Android keyboard will show when you'll attempt to edit the title (press the edit button)
+                focusNode: titleFocusNode,
                 style: const TextStyle(
                   color: Color.fromRGBO(255, 255, 255, 1),
                   fontWeight: FontWeight.w400,
@@ -173,7 +180,7 @@ class _NewNoteState extends State<NewNote> {
             padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
               onPressed: toggleEditTitle,
-              tooltip: isEditingTitle ? LanguageData.getText("newNoteEditTitle") : LanguageData.getText("newNoteSaveTitle"),
+              tooltip: isEditingTitle ? LanguageData.getText("newNoteSaveTitle") : LanguageData.getText("newNoteEditTitle"),
               icon: Icon(isEditingTitle ? Icons.check : Icons.edit),
             ),
           )

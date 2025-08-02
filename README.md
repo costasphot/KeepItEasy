@@ -1,24 +1,27 @@
-# KeepItEasy - Release v0.1.1-alpha
+# KeepItEasy - Release v0.2.0-alpha
 
 ## Overview
 
-This is the second alpha release of the application. It mostly contains performance improvements. This release is intended for testing and feedback purposes only and is not production-ready.
+This is the third alpha release of the application. I changed the application's structure into something more maintainable and scalable (main -> src/app -> views/home_view). Many performance improvements were also made. This release is intended for testing and feedback purposes only and is not production-ready.
 
 ## New Features
 
-- Added a GestureDetector and a scroll controller in the languages pop-up so that you can scroll (for future updates, where there will way more languages).
+- Added themes functionality.
 
 ## Bug Fixes
 
-- Prevented pixel overflow when resizing the add-a-note pop-up from a desktop app (doesn't matter in any mobile device).
+- None
 
 ## Performance Improvements
 
-- Added a controller in the disposal (cleanup) function to avoid any memory leaks.
-- Added an observer to observe the app's lifecycle and ensure that if the user or the system suddenly closes/kills the app, the resources will be properly disposed, and also that the app will close fluently.
-- Added cross-compatible code (especially in GlobalSettings) so that it works on different desktops and platforms.
-- Added configuration for running on different desktops, platforms and also modes (debug/production), in '[launch.json](./.vscode/launch.json)'.
-- Added a 'PopScope' so that I can handle the disposal of the scroll controller (in main, it would be handled by the 'dispose' function).
+- Made a separate 'build' Widget function for the settings' button (in 'home_view.dart'), so that the whole app doesn't get built everytime the settings button's state is changed.
+- Changed all colours from using 'Colors.fromRGBO()' to 'Color.', because I saw that in the documentation, colours from 'Color.' are initialized as static constants, and thus are faster since no function callback is happening, unlike when using 'Colors.fromRGBO()' or 'Colors.fromARGBO()'.
+
+## General/Scalability Improvements
+
+- Changed the entire application's strucutre into something more maintainable and scalable. Separated the entry point/initialization of the app (main.dart) from the GIOREJOGIREJIOGEKGIROIGWOFW (src/app.dart). Also, created different folders for source files, constants, views and widgets. As a result, the home view was transferred from the 'app.dart' to the 'home_view.dart' inside the 'src/views/' directory.
+- Created a file for all colours (constants) used inside the app (src/constants/colours.dart).
+- Created a file for all themes (src/theme_data.dart).
 
 ## Known Issues
 

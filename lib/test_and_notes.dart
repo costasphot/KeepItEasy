@@ -213,3 +213,50 @@ Future<void> showTestPopup(BuildContext context /* Instance */, String? message)
  * When importing a package or file, Dart's build system (including the Dart Analyzer and Dart Compiler) resolves these
  *  imports at compile time. It works similarly to how static linking in C/C++.
  */
+
+/** Some theoretical stuff
+ * external const factory bool.fromEnvironment(String name,
+ *    {bool defaultValue = false});
+ * 
+ * 'external': Indicates that the implementation of the function is provided outside of Dart code, typically in platform-
+ *   specific code or native code. In this case, it implies that the actual implementation of 'bool.fromEnvironment' is not
+ *   written in Dart but is provided by the Dart runtime of the underlying platform.
+ * 
+ * 'const': Specifies that the constructor is a constant constructor. This means that it can be used to create compile-time
+ *   constants. Instances created with this constructor will be canonicalized (i.e., the same constant value will always
+ *   refer to the same instance).
+ * 
+ * 'factory': Defines a factory constructor. A factory constructor is used to return an instance of the class. It doesn't
+ *   necessarily create a new instance but can return an existing instance or a subclass instance. In this case, it allows
+ *   the constructor to perform additional logic to determine which instance should be returned.
+ * 
+ * 'bool.fromEnvironment': This is the name of the factory constructor. It suggests that this constructor creates a 'bool'
+ *   instance based on the value of an environment variable.
+ * 
+ * 'String name': This is a required parameter. It specifies the name of the environment variable whose value will be used
+ *   to determine the boolean value.
+ * 
+ * '{bool defaultValue = false}': This is an optional named parameter with a default value of 'false'. If the environment
+ *   variable specified by 'name' is not found, 'defaultValue' will be used as the boolean value. 
+ */
+
+/** Bool is case-sensitive by default. See definition:
+ * external static bool? tryParse(String source, {bool caseSensitive = true});
+ */
+
+/** Defining a static getter in 'theme_data.dart' (2 ways)
+ * 
+ *   Expression Body Syntax
+ * static ThemeData get currentThemeData => ThemeConfig.appThemeData[currentTheme]!;
+ * 
+ * - Ideal for simple getters that just return a single value or expression.
+ * - Often considered more readable and coincise for simple getters or methods.
+ * 
+ *   Block Body Syntax
+ * static ThemeData get currentThemeData {
+ *   ThemeConfig.appThemeData[currentTheme]!;
+ * }
+ * 
+ * - Provides more flexibility, allowing for additional logic before returning a value, if needed in the future.
+ * - More verbose, which might be less coincise for simple getters but useful for more complex logic.
+ */
